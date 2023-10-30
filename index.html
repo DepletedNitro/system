@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Screen</title>
+    <title>Attendance System</title>
     <style>
         body {
-            background-image: url('https://images.unsplash.com/photo-1554147090-e1221a04a025?auto=format&fit=crop&q=80&w=1448&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Replace 'background.jpg' with your image file */
+            background-image: url('https://images.unsplash.com/photo-1554091780-bb3e99c4b02a?auto=format&fit=crop&q=80&w=2071&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
@@ -26,7 +26,25 @@
             text-align: center;
         }
 
-        button {
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+
+        .action-button {
             background-color: #3498db;
             color: #fff;
             border: none;
@@ -34,18 +52,112 @@
             border-radius: 5px;
             cursor: pointer;
             margin: 10px;
+            text-decoration: none;
         }
 
-        button:hover {
+        .action-button:hover {
             background-color: #2980b9;
+            text-decoration: none;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="home-content">
         <h1>Pengurusan Kehadiran</h1>
-        <button id="login-button" onclick="location.href='login.html'">Log In</button>
-        <button id="register-button" onclick="location.href='register.html'">Register</button>
+        <a href="#" id="login-button" class="action-button">Log In</a>
+        <a href="#" id="register-button" class="action-button">Register</a>
     </div>
+    
+    <div class="container" id="login-content" style="display: none;">
+        <a href="#" id="back-link-login" class="back-button">Back</a>
+        <h2>Login</h2>
+        <form id="loginForm" action="#">
+            <div class="form-container">
+                <input type="text" name="nokp_or_username" placeholder="NoKP or Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login" class="action-button">
+            </div>
+        </form>
+    </div>
+    
+    <div class="container" id="register-content" style="display: none;">
+        <a href="#" id="back-link-register" class="back-button">Back</a>
+        <h2>Register</h2>
+        <form id="registrationForm" action="#">
+            <div class="form-container">
+                <input type="text" name="nokp" pattern="[0-9]{12}" title="Enter a valid 12-digit NoKP" placeholder="NoKP" required>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="text" name="nama" pattern="[A-Za-z ]+" title="Only letters and spaces are allowed" placeholder="Nama" required>
+                <input type="text" name="nama_kelas" placeholder="Nama Kelas" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Register" class="action-button">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the elements
+        const homeContent = document.getElementById("home-content");
+        const loginContent = document.getElementById("login-content");
+        const registerContent = document.getElementById("register-content");
+        const backLinkLogin = document.getElementById("back-link-login");
+        const backLinkRegister = document.getElementById("back-link-register");
+
+        // Add click event listeners to the buttons
+        document.getElementById("login-button").addEventListener("click", () => {
+            homeContent.style.display = "none";
+            loginContent.style.display = "block";
+            registerContent.style.display = "none";
+        });
+
+        document.getElementById("register-button").addEventListener("click", () => {
+            homeContent.style.display = "none";
+            loginContent.style.display = "none";
+            registerContent.style.display = "block";
+        });
+
+        // Add click event listeners to the back buttons
+        backLinkLogin.addEventListener("click", (event) => {
+            event.preventDefault();
+            homeContent.style.display = "block";
+            loginContent.style.display = "none";
+            registerContent.style.display = "none";
+        });
+
+        backLinkRegister.addEventListener("click", (event) => {
+            event.preventDefault();
+            homeContent.style.display = "block";
+            loginContent.style.display = "none";
+            registerContent.style.display = "none";
+        });
+
+        // Handle login and registration logic
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            // Handle login logic here
+        });
+
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            // Handle registration logic here
+        });
+    </script>
 </body>
 </html>
